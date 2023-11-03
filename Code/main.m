@@ -65,20 +65,22 @@ function colorDetection(brick)
     fprintf("\tBlue: %d\n", color_rgb(3));
 
     while true
-        color_rgb = brick.ColorRGB(1)
-        case (color_rgb(1) > (color_rgb(2) + color_rgb(3)))
+        brick.MoveMotor('A', -10);
+        brick.MoveMotor('B', 10);
+        color = brick.ColorCode(SensorPort);
+        case (color == 5)
             disp('RED');
             pause(1);
         end
 
-        case (color_rgb(2) > (color_rgb(1) + color_rgb(3)))
+        case (color == 2)
             disp('BLUE');
             pause(0.1);
             brick.beep();
             brick.beep();
         end
 
-        case (color_rgb(3) > (color_rgb(1) + color_rgb(2)))
+        case (color == 3)
             disp('GREEN');
             pause(0.1);
             brick.beep();
